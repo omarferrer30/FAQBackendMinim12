@@ -1,4 +1,4 @@
-let URL='http://147.83.7.206:8080';//http://localhost:8080  http://147.83.7.206:8080
+let URL='http://localhost:8080';//http://localhost:8080  http://147.83.7.206:8080
 function signup() {
 
     var email = $('#email').val();
@@ -42,6 +42,7 @@ function login() {
             localStorage.setItem("activeUser", username);
             localStorage.setItem("id", result.id);
             localStorage.setItem("coins", result.coins);
+            sessionStorage.setItem("AuthenticationState", "Authenticated");
             window.location.href = "Main.html";
         },
         error: function(error){
@@ -122,14 +123,13 @@ function getItemsList(){
         url: "/dsaApp/item/itemsList",
         dataType: 'json',
         success:function (result) {
-            let content = "<table><tr><th></th><th>Name</th><th>Description</th><th>Price</th><th>image</th></tr>";
             for (let i = 0; i < result.length; i++) {
-               //content += '<tr><td>' + '<img src ="images/' + result[i].image + '.png" alt="Image" style="width:30% height:30%">' +
+                console.log("i: "+i, result[i]);
                 $("#itemsTable").append(
                     "<tr> <td>" + result[i].name +
                     "</td> <td>" + result[i].description +
                     "</td> <td>" + result[i].price +
-                   "</td><td>" +  '<img src ="images/' + result[i].image + '.png" alt="Image" style="width:30% height:30%">' + "</td></tr>" +
+                    "</td><td>" +  '<img src ="images/' + result[i].image + '.png" width = "100" height ="100">' + "</td></tr>" +
                     '</td><td>' + '<button type = "button" id ="' + result[i].name + '"' + '"onclick="PurchaseItem(this.id)">Purchase</button>' + '</td> </tr>');
 
             }},
@@ -143,6 +143,8 @@ function getItemsList(){
 }
 
 //function PurchaseItem (item){};
+
+
 function getRanking(){
     $.ajax({
         type: 'GET',
@@ -164,7 +166,6 @@ function getRanking(){
         error: function (error) {
             alert("Unable to get Shop data." + error);
             console.log(error);
-            window.location.href = "Main.html";
         }
     })
 }

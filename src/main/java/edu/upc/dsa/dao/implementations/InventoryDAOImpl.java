@@ -84,6 +84,7 @@ public class InventoryDAOImpl implements InventoryDAO {
             u.setCoins(coins);
             logger.info("El usuario"+ u.getUsername()+ "ha comprado el item" + i.getName());
         }
+        else {logger.info("No tiene suficientes monedas o ya tiene el item en su inventario.");}
         return inventory;
 
     }

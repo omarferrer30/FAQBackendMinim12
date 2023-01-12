@@ -2,7 +2,7 @@ table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
-    border: 3px solid darkred;
+    border: 2px solid darkred;
 }
 
 thead th:nth-child(1) {
@@ -22,5 +22,5 @@ thead th:nth-child(4) {
 }
 
 th, td {
-    padding: 20px;
+    padding: 30px;
 }
